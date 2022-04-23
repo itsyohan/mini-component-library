@@ -14,12 +14,11 @@ const Container = styled.div`
   height: var(--height);
 `
 
-const RadioValue = styled.div`
+const Bar = styled.div`
   position: absolute;
   background-color ${COLORS.primary};
-  border-radius: 4px 0px 0px 4px;
+  border-radius: var(--border-radius);
   top: var(--top);
-  left: var(--left);
   height: var(--height);
   width: var(--width);
 `
@@ -30,13 +29,14 @@ const ProgressBar = ({ value, size }) => {
   }
   const radioStyle = {
     '--top': size === 'large' ? '4px' : '0px',
-    '--left': size === 'large' ? '1px' : '0px',
     '--height': size === 'large' ? '16px' : size === 'medium' ? '12px' : '8px',
-    '--width': value + '%'
+    '--width': value + '%',
+    '--border-radius': value > 98 ? '4px' : '4px 0px 0px 4px'
   }
   return (
     <Container style={containerStyle}>
-      <RadioValue style={radioStyle} value={value} />
+      <Bar style={radioStyle} value={value} />
+      <VisuallyHidden>{value}</VisuallyHidden>
     </Container>
   );
 };
